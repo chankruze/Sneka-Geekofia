@@ -114,10 +114,12 @@ def main():
     # giant frog
     giant_frog = BonusFrog(random_frog(snake))
 
+    # Sound
+    pygame.mixer.init()
+    beep = pygame.mixer.Sound('assets/beep.wav')
+
     # clock
     fps_clock = pygame.time.Clock()
-    clock2 = pygame.time.Clock()
-    time = 5
 
     while True:
         # delay the time
@@ -134,6 +136,8 @@ def main():
 
         # when snake kisses food
         if snake.body[0].position == frog.position:
+            # beep
+            beep.play()
             # increase snake's length
             snake.add_cube()
             # place brand new frog
@@ -141,6 +145,7 @@ def main():
             giant_frog = BonusFrog(random_frog(snake))
 
         if snake.body[0].position == giant_frog.position and giant_frog.is_spanned():
+            beep.play()
             # increase snake's length
             # snake.add_cube()
             # place brand new frog
